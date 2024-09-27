@@ -1,0 +1,449 @@
+/* .......................................................... Global css ........................................................... */
+html, body {
+    height: 100%; /* Ensure full height for the body */
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+}
+
+/* Hide scrollbar for IE and Edge */
+body {
+    -ms-overflow-style: none; /* Hides scrollbar for IE and Edge */
+    scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
+/* .......................................................... TaskTable css ........................................................... */
+.task-table-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+.table-header-main {
+    background-color: #eae8e8;
+    padding: 5px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    position: fixed; /* Make header fixed */
+    top: 0; /* Position it at the top */
+    left: 0; /* Align to left */
+    right: 0; /* Align to right */
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.list-icon {
+    margin-right: 10px;
+}
+
+.list-icon i {
+    font-size: 30px;
+    color: white;
+    background-color: rgb(208, 55, 55);
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.table-header-heading {
+    display: flex;
+    flex-direction: row;
+}
+
+.title h2,
+.title h3 {
+    margin: 0;
+}
+
+.task-btn {
+    display: flex;
+    align-items: center;
+}
+
+.task-btn button {
+    padding: 10px 50px;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.new-task-btn,
+.refresh-btn {
+    background-color: #ffd966;
+    color: rgb(82, 81, 81);
+    font-weight: bold;
+    border: 1px solid #f6c430;
+    margin: 0;
+}
+
+.table-header-search {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-input {
+    padding: 10px;
+    height: 20px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.content {
+    flex: 1; /* Make this section take available space */
+    padding-top: 140px; /* Add padding to avoid content being behind the header */
+    padding-bottom: 100px;
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.task-table th,
+.task-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button {
+    background-color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #ddd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #eae8e8;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.pagination button,
+.pagination select {
+    padding: 8px 20px;
+    width: 90px;
+    border: 1px solid grey;
+    font-weight: bold;
+    color: grey;
+}
+
+@media (max-width: 768px) {
+    .task-btn {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        align-items: flex-start; /* Align to the left */
+        margin-top: 10px; /* Add spacing between heading and buttons */
+    }
+
+    .task-btn button {
+        width: 100%; /* Make buttons full width */
+        margin-bottom: 10px; /* Add margin between buttons */
+    }
+
+    .search-input {
+        max-width: 100%; /* Allow search input to take full width */
+    }
+}
+
+@media (max-width: 480px) {
+    .list-icon i {
+        font-size: 24px; /* Reduce icon size */
+    }
+
+    .title h2 {
+        font-size: 18px; /* Adjust heading sizes */
+    }
+
+    .title h3 {
+        font-size: 16px; /* Adjust heading sizes */
+    }
+
+    .new-task-btn,
+    .refresh-btn {
+        padding: 10px 20px; /* Adjust padding for buttons */
+    }
+}
+
+@media (max-width: 300px) {
+    .table-header {
+        flex-direction: column; /* Stack header content */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .table-header-search {
+        flex-direction: column; /* Stack search input below record count */
+        align-items: flex-start; /* Align search input to the left */
+    }
+
+    .table-header-search p {
+        margin-bottom: 10px; /* Add margin for spacing */
+    }
+}
+
+
+/* .......................................................... NewTask css ........................................................... */
+.new-task-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-task-modal-content {
+    background-color: white;
+    width: 70%; /* 70% of screen width */
+    height: 70%; /* 70% of screen height */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* For positioning footer */
+}
+
+.new-task-modal-header {
+    background-color: lightgrey;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative; /* To position the close icon */
+}
+
+.new-task-modal-close {
+    position: absolute; /* Positioning it absolutely */
+    top: 10px; /* Adjust top position */
+    right: 10px; /* Adjust right position */
+    cursor: pointer; /* Cursor pointer on hover */
+}
+
+.new-task-modal-footer {
+    background-color: lightgrey;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute; /* Make footer absolute */
+    bottom: 0; /* Align footer to the bottom */
+    left: 0;
+    right: 0; /* Stretch footer to full width */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.new-task-required {
+    color: red;
+}
+
+.new-task-form-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+label {
+    flex: 1;
+    margin: 0 10px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    width: calc(100% - 20px); /* Adjust width for fields */
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 100px; /* Fixed height for the comment box */
+    width: 100%;
+    resize: none; /* Prevent resizing */
+}
+
+.new-task-comment-main{
+    display: flex;
+    flex-direction: column;
+}
+
+.new-task-comment{
+    width: calc(100% - 50px);
+}
+
+button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-task-cancel-btn {
+    background-color: red;
+    color: white;
+}
+
+.new-task-save-btn {
+    background-color: green;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 270px) {
+    .new-task-modal-content {
+        width: 90%;
+        height: 90%; /* Maintain size */
+    }
+}
+
+@media (min-width: 271px) and (max-width: 768px) {
+    .new-task-modal-content {
+        width: 80%;
+        height: 80%; /* Maintain size */
+    }
+}
+
+@media (min-width: 769px) {
+    .new-task-modal-content {
+        width: 70%;
+        height: 70%; /* Maintain size */
+    }
+}
+
+
+
+
+/* ..........................................................  DeleteTask css ........................................................... */
+.delete-task-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-task-modal-content {
+    background-color: white;
+    width: 100%; /* Default width */
+    max-width: 800px; /* Max width for larger screens */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* For positioning the close icon */
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-task-modal-header {
+    background-color: red;
+    color: white;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+}
+
+.delete-task-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.delete-task-modal-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.delete-task-modal-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-task-yes-btn,
+.delete-task-no-btn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-task-yes-btn {
+    background-color: green;
+    color: white;
+}
+
+.delete-task-no-btn {
+    background-color: red;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .delete-task-modal-content {
+        width: 80%; /* Adjust width for smaller screens */
+    }
+}
+
